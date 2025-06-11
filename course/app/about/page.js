@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 
-export default function AppPage(props) {
+export default function AboutPage(props) {
   return (
     <>
-      <h1>首頁</h1>
+      <h1>關於我們</h1>
     </>
   )
 }
