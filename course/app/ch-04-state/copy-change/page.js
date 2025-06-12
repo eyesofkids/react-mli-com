@@ -21,7 +21,9 @@ export default function CopyChangePage() {
       <button
         onClick={() => {
           // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)，也可以使用structuredClone
-          const nextUser = JSON.parse(JSON.stringify(user))
+          // const nextUser = JSON.parse(JSON.stringify(user))
+          // 因為只需要改姓名(name)，實際上淺拷貝到第一層就足夠
+          const nextUser = { ...user }
           // 2. 在拷貝出來的新副本上更動
           nextUser.name = '李四'
           // 3. 呼叫setState設定到狀態
@@ -33,7 +35,9 @@ export default function CopyChangePage() {
       <button
         onClick={() => {
           // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)
-          const nextUser = JSON.parse(JSON.stringify(user))
+          // const nextUser = JSON.parse(JSON.stringify(user))
+          // 至少需要拷貝到第二層
+          const nextUser = { ...user, profile: { ...user.profile } }
           // 2. 在拷貝出來的新副本上更動
           nextUser.profile.phone = '0912345678'
           // 3. 呼叫setState設定到狀態
