@@ -10,7 +10,7 @@ import data from './_data/insurance-claim.json'
 //     "date": "2023-05-15",
 //     "amount": 45000,
 //     "status": "處理中"
-//   }
+//  }
 
 export default function ClaimTablePage() {
   console.log(data)
