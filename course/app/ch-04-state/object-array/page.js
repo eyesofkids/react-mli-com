@@ -115,11 +115,35 @@ export default function ObjectArrayPage() {
         4. 列表最後面，新增一個文字為yyy的物件(id不能與其它資料重覆)
       </button>
       <br />
-      <button onClick={() => {}}>
+      <button
+        onClick={() => {
+          // 1 2
+          // 由於filter會回傳一個套用過濾條件回調後的新陣列，所以可以用狀態直接呼叫它
+          const nextData = data.filter((v, i) => {
+            return v.text.includes('a')
+          })
+
+          // 3
+          setData(nextData)
+        }}
+      >
         5. 尋找(過濾)只呈現所有文字中有包含a英文字母的資料
       </button>
       <br />
-      <button onClick={() => {}}>6. 刪除文字為b的物件資料</button>
+      <button
+        onClick={() => {
+          // 相當於排除掉文字為b的資料
+          // (尋找文字為b的資料)判斷條件回調的顛倒
+          const nextData = data.filter((v, i) => {
+            return v.text !== 'b'
+          })
+
+          // 3
+          setData(nextData)
+        }}
+      >
+        6. 刪除文字為b的物件資料
+      </button>
       <br />
       <button onClick={() => {}}>7. 刪除id為4的物件資料</button>
       <br />
