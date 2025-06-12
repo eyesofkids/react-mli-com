@@ -109,10 +109,6 @@ export default function ObjectArrayPage() {
       <button onClick={() => {}}>8. 取代id為3的文字為cccc</button>
       <br />
       <button onClick={() => {}}>9. 清空表格</button>
-      <br />
-      <button onClick={() => {}}>
-        10. 在id為2後面插入id為5與文字為bbb的物件
-      </button>
     </>
   )
 }
