@@ -21,12 +21,14 @@ export default function ClaimTablePage() {
       <hr />
       <table border="1">
         <thead>
-          <th>ID</th>
-          <th>姓名</th>
-          <th>類型</th>
-          <th>日期</th>
-          <th>金額</th>
-          <th>狀態</th>
+          <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>類型</th>
+            <th>日期</th>
+            <th>金額</th>
+            <th>狀態</th>
+          </tr>
         </thead>
         <tbody>
           {data.map((v, i) => {
