@@ -20,7 +20,7 @@ export default function CopyChangePage() {
       <p>{JSON.stringify(user)}</p>
       <button
         onClick={() => {
-          // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)
+          // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)，也可以使用structuredClone
           const nextUser = JSON.parse(JSON.stringify(user))
           // 2. 在拷貝出來的新副本上更動
           nextUser.name = '李四'
