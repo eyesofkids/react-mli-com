@@ -145,11 +145,67 @@ export default function ObjectArrayPage() {
         6. 刪除文字為b的物件資料
       </button>
       <br />
-      <button onClick={() => {}}>7. 刪除id為4的物件資料</button>
+      <button
+        onClick={() => {
+          // 相當於排除掉id為4的資料
+          // (尋找id為4的資料)判斷條件回調的顛倒
+          const nextData = data.filter((v, i) => {
+            return v.id !== 4
+          })
+
+          // 3
+          setData(nextData)
+        }}
+      >
+        7. 刪除id為4的物件資料
+      </button>
       <br />
-      <button onClick={() => {}}>8. 取代id為3的文字為cccc</button>
+      <button
+        onClick={() => {
+          // 1
+          const nextData = JSON.parse(JSON.stringify(data))
+          // 2
+          // 2-1 先找到id為3的索引值為何
+          const foundIndex = nextData.findIndex((v) => v.id === 3)
+
+          // 如果有找到的話
+          if (foundIndex !== -1) {
+            // 2-2 利用索引值更動該物件的text屬性值
+            nextData[foundIndex].text = 'cccc'
+            // 3
+            setData(nextData)
+          }
+
+          // 針對剛好是"物件陣列"(第一層陣列，第二層物件)的狀態樣式的語法
+        }}
+      >
+        8-1. 取代id為3的文字為cccc
+      </button>
       <br />
-      <button onClick={() => {}}>9. 清空表格</button>
+      <button
+        onClick={() => {
+          // 針對剛好是"物件陣列"(第一層陣列，第二層物件)的狀態樣式的語法
+          // 呼叫map作陣列展開成員的動作
+          const nextData = data.map((v, i) => {
+            // 如果找到id為3的成員，則作拷貝物件的動作，並更動text屬性值
+            if (v.id === 3) return { ...v, text: 'cccc' }
+            else return v
+          })
+
+          // 3
+          setData(nextData)
+        }}
+      >
+        8-2. 取代id為3的文字為cccc
+      </button>
+      <br />
+      <button
+        onClick={() => {
+          setData([])
+        }}
+      >
+        9. 清空表格
+      </button>
     </>
   )
 }
