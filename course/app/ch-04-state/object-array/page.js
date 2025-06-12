@@ -185,10 +185,11 @@ export default function ObjectArrayPage() {
       <button
         onClick={() => {
           // 針對剛好是"物件陣列"(第一層陣列，第二層物件)的狀態樣式的語法
-          // 呼叫map作陣列展開成員的動作
+          // 呼叫map作陣列展開成員的動作(相當於可以拷貝到第一層)
           const nextData = data.map((v, i) => {
-            // 如果找到id為3的成員，則作拷貝物件的動作，並更動text屬性值
+            // 如果找到id為3的成員，則作拷貝物件，並更動text屬性值的動作再返回(相當於拷貝到第二層物件)
             if (v.id === 3) return { ...v, text: 'cccc' }
+            // 其它物件直接返回
             else return v
           })
 
