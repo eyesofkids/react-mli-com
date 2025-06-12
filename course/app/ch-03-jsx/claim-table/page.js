@@ -30,6 +30,7 @@ export default function ClaimTablePage() {
         </thead>
         <tbody>
           {data.map((v, i) => {
+            /* key值加在最靠近return的元素上，使用資料的id值是最佳選擇  */
             return (
               <tr key={v.id}>
                 <td>{v.id}</td>
