@@ -51,6 +51,15 @@ export default function ShoppingCartPage() {
     // 3
     setProducts(nextProducts)
   }
+  // 處理刪除
+  const handleRemove = (productId) => {
+    const nextProducts = products.filter((product) => {
+      return product.id !== productId
+    })
+
+    // 3
+    setProducts(nextProducts)
+  }
 
   return (
     <ul>
@@ -66,7 +75,18 @@ export default function ShoppingCartPage() {
           </button>
           <button
             onClick={() => {
-              handleDecrease(product.id)
+              // 先計算出接下來要變動的數量值
+              const nextCount = product.count - 1
+
+              if (nextCount <= 0) {
+                // 作刪除的動作
+                if (confirm('確定要刪除此商品?')) {
+                  handleRemove(product.id)
+                }
+              } else {
+                // 作遞減的動作
+                handleDecrease(product.id)
+              }
             }}
           >
             –
