@@ -61,6 +61,34 @@ export default function ShoppingCartPage() {
     setProducts(nextProducts)
   }
 
+  // react官網解法(第二題)
+  function handleDecreaseClick(productId) {
+    // 遞減一定會作，注意這裡要用let
+    let nextProducts = products.map((product) => {
+      if (product.id === productId) {
+        return {
+          ...product,
+          count: product.count - 1,
+        }
+      } else {
+        return product
+      }
+    })
+    // 再作一次過濾，只保留商品數量(count)大於0的物件
+    nextProducts = nextProducts.filter((p) => p.count > 0)
+
+    // 用products與nextProducts陣列中的成員個數(length)來判斷是要作遞減還是刪除
+    if (products.length > nextProducts.length) {
+      // 作刪除
+      if (confirm('你確定要刪除嗎？')) {
+        setProducts(nextProducts)
+      }
+    } else {
+      // 作遞減
+      setProducts(nextProducts)
+    }
+  }
+
   return (
     <ul>
       {products.map((product) => (
@@ -90,6 +118,13 @@ export default function ShoppingCartPage() {
             }}
           >
             –
+          </button>
+          <button
+            onClick={() => {
+              handleDecreaseClick(product.id)
+            }}
+          >
+            –(官網)
           </button>
         </li>
       ))}
