@@ -5,8 +5,10 @@ import { useState } from 'react'
 import styles from './_styles/star.module.css'
 
 export default function StarPage() {
-  // 目前的評分記錄，一開始為0代表未點按
+  // 點按的評分記錄，一開始為0代表未點按
   const [rating, setRating] = useState(0)
+  // hover(懸停)的評分記錄，一開始為0代表未點按
+  const [hoverRating, setHoverRating] = useState(0)
 
   return (
     <>
@@ -23,13 +25,25 @@ export default function StarPage() {
             return (
               <button
                 key={i}
+                onMouseEnter={() => {
+                  setHoverRating(score)
+                }}
+                onMouseLeave={() => {
+                  setHoverRating(0)
+                }}
                 onClick={() => {
                   // 設定評分
                   setRating(score)
                 }}
                 className={styles.starBtn}
               >
-                <span className={score <= rating ? styles.on : styles.off}>
+                <span
+                  className={
+                    score <= rating || score <= hoverRating
+                      ? styles.on
+                      : styles.off
+                  }
+                >
                   &#9733;
                 </span>
               </button>
