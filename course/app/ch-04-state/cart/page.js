@@ -23,13 +23,54 @@ const initialProducts = [
 export default function ShoppingCartPage() {
   const [products, setProducts] = useState(initialProducts)
 
+  // 遞增使用的處理函式
+  const handleIncrease = (productId) => {
+    // 1 2
+    const nextProducts = products.map((product) => {
+      // 如果找到id為productId的成員，則作count屬性遞增
+      if (product.id === productId)
+        return { ...product, count: product.count + 1 }
+      // 其它物件直接返回
+      else return product
+    })
+
+    // 3
+    setProducts(nextProducts)
+  }
+  // 遞減使用的處理函式
+  const handleDecrease = (productId) => {
+    // 1 2
+    const nextProducts = products.map((product) => {
+      // 如果找到id為productId的成員，則作count屬性遞減
+      if (product.id === productId)
+        return { ...product, count: product.count - 1 }
+      // 其它物件直接返回
+      else return product
+    })
+
+    // 3
+    setProducts(nextProducts)
+  }
+
   return (
     <ul>
       {products.map((product) => (
         <li key={product.id}>
           {product.name} (<b>{product.count}</b>)
-          <button onClick={() => {}}>+</button>
-          <button onClick={() => {}}>–</button>
+          <button
+            onClick={() => {
+              handleIncrease(product.id)
+            }}
+          >
+            +
+          </button>
+          <button
+            onClick={() => {
+              handleDecrease(product.id)
+            }}
+          >
+            –
+          </button>
         </li>
       ))}
     </ul>
