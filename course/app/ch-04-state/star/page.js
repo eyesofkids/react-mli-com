@@ -13,15 +13,18 @@ export default function StarPage() {
       <h1>星星評分範例</h1>
       <hr />
       <div>
+        {/* 快速建立一個包含1...N數字陣列的表達式語法 */}
         {Array(5)
           .fill(1)
           .map((v, i) => {
+            // 每個星星按鈕的分數(索引+1)
             const score = i + 1
 
             return (
               <button
                 key={i}
                 onClick={() => {
+                  // 設定評分
                   setRating(score)
                 }}
                 className={styles.starBtn}
