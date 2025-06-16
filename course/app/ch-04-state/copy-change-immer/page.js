@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+// 使用immer
+import { produce } from 'immer'
 
 export default function CopyChangeImmerPage() {
   const [user, setUser] = useState({
@@ -20,12 +22,10 @@ export default function CopyChangeImmerPage() {
       <p>{JSON.stringify(user)}</p>
       <button
         onClick={() => {
-          // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)，也可以使用structuredClone
-          // const nextUser = JSON.parse(JSON.stringify(user))
-          // 因為只需要改姓名(name)，實際上淺拷貝到第一層就足夠
-          const nextUser = { ...user }
-          // 2. 在拷貝出來的新副本上更動
-          nextUser.name = '李四'
+          // 在immer中的draft(草稿狀態)，是用proxy產生的複本狀態，其中可以直接修改
+          const nextUser = produce(user, (draft) => {
+            draft.name = '李四'
+          })
           // 3. 呼叫setState設定到狀態
           setUser(nextUser)
         }}
@@ -34,12 +34,9 @@ export default function CopyChangeImmerPage() {
       </button>
       <button
         onClick={() => {
-          // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)
-          // const nextUser = JSON.parse(JSON.stringify(user))
-          // 至少需要拷貝到第二層
-          const nextUser = { ...user, profile: { ...user.profile } }
-          // 2. 在拷貝出來的新副本上更動
-          nextUser.profile.phone = '0912345678'
+          const nextUser = produce(user, (draft) => {
+            draft.profile.phone = '0912345678'
+          })
           // 3. 呼叫setState設定到狀態
           setUser(nextUser)
         }}
@@ -48,10 +45,9 @@ export default function CopyChangeImmerPage() {
       </button>
       <button
         onClick={() => {
-          // 1. 從目前的狀態拷貝出一個副本(必要時深拷貝)
-          const nextUser = JSON.parse(JSON.stringify(user))
-          // 2. 在拷貝出來的新副本上更動
-          nextUser.profile.address.city = '新北市'
+          const nextUser = produce(user, (draft) => {
+            draft.profile.address.city = '新北市'
+          })
           // 3. 呼叫setState設定到狀態
           setUser(nextUser)
         }}
