@@ -26,9 +26,11 @@ export default function StarPage() {
               <button
                 key={i}
                 onMouseEnter={() => {
+                  // 設定hover分數
                   setHoverRating(score)
                 }}
                 onMouseLeave={() => {
+                  // 設定回初始值
                   setHoverRating(0)
                 }}
                 onClick={() => {
