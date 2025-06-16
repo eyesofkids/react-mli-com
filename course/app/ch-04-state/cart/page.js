@@ -6,16 +6,19 @@ const initialProducts = [
   {
     id: 0,
     name: '小熊餅乾',
+    price: 50,
     count: 1,
   },
   {
     id: 1,
     name: '巧克力豆餅乾',
+    price: 100,
     count: 5,
   },
   {
     id: 2,
     name: '小老板海苔',
+    price: 150,
     count: 2,
   },
 ]
@@ -89,45 +92,58 @@ export default function ShoppingCartPage() {
     }
   }
 
-  return (
-    <ul>
-      {products.map((product) => (
-        <li key={product.id}>
-          {product.name} (<b>{product.count}</b>)
-          <button
-            onClick={() => {
-              handleIncrease(product.id)
-            }}
-          >
-            +
-          </button>
-          <button
-            onClick={() => {
-              // 先計算出接下來要變動的數量值
-              const nextCount = product.count - 1
+  // 總數量&總價
+  const totalQty = products.reduce((acc, product) => acc + product.count, 0)
+  const totalAmount = products.reduce(
+    (acc, product) => acc + product.count * product.price,
+    0
+  )
 
-              if (nextCount <= 0) {
-                // 作刪除的動作
-                if (confirm('確定要刪除此商品?')) {
-                  handleRemove(product.id)
+  return (
+    <>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            {product.name} (<b>{product.count}</b>)
+            <button
+              onClick={() => {
+                handleIncrease(product.id)
+              }}
+            >
+              +
+            </button>
+            <button
+              onClick={() => {
+                // 先計算出接下來要變動的數量值
+                const nextCount = product.count - 1
+
+                if (nextCount <= 0) {
+                  // 作刪除的動作
+                  if (confirm('確定要刪除此商品?')) {
+                    handleRemove(product.id)
+                  }
+                } else {
+                  // 作遞減的動作
+                  handleDecrease(product.id)
                 }
-              } else {
-                // 作遞減的動作
-                handleDecrease(product.id)
-              }
-            }}
-          >
-            –
-          </button>
-          <button
-            onClick={() => {
-              handleDecreaseClick(product.id)
-            }}
-          >
-            –(官網)
-          </button>
-        </li>
-      ))}
-    </ul>
+              }}
+            >
+              –
+            </button>
+            <button
+              onClick={() => {
+                handleDecreaseClick(product.id)
+              }}
+            >
+              –(官網)
+            </button>
+          </li>
+        ))}
+      </ul>
+      <hr />
+      <p>
+        總數量: {totalQty} / 總價: NT${totalAmount.toLocaleString()}
+      </p>
+    </>
   )
 }
