@@ -93,6 +93,8 @@ export default function ShoppingCartPage() {
   }
 
   // 總數量&總價
+  // 使用reduce(累加/歸納)迭代方法
+  // 這種變數值稱為衍生(派生)狀態(derived state)，意即是狀態的一部份，或是由狀態再計算得來的值
   const totalQty = products.reduce((acc, product) => acc + product.count, 0)
   const totalAmount = products.reduce(
     (acc, product) => acc + product.count * product.price,
