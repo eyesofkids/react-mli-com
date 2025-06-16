@@ -13,14 +13,14 @@ export default function ChildB({ setDataFromChild = () => {} }) {
   return (
     <>
       <h3>Child(子女元件)-b</h3>
-      <button
+      {/* <button
         onClick={() => {
           // 解決方案2: 事件觸發時的處理函式中呼叫回送資料的函式
           setDataFromChild(cData)
         }}
       >
         送資料給父母
-      </button>
+      </button> */}
     </>
   )
 }

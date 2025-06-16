@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import ChildA from './child-a'
 import ChildB from './child-b'
+import ChildC from './child-c'
 
 export default function Parent() {
   const [pData, setPData] = useState('parent data')
@@ -14,11 +15,13 @@ export default function Parent() {
   return (
     <>
       <h2>Parent(父母元件)</h2>
-      <p>從child-b來的資料: {dataFromChild}</p>
+      {/* <p>從child-b來的資料: {dataFromChild}</p> */}
       {/* P -> C */}
       <ChildA pData={pData} />
       {/* C -> P */}
       <ChildB setDataFromChild={setDataFromChild} />
+      {/* C -> C */}
+      <ChildC dataFromChild={dataFromChild} />
     </>
   )
 }
