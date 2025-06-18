@@ -5,7 +5,7 @@ import { useState } from 'react'
 // 範例資料
 import data from '../_data/books.json'
 // 使用item元件
-import Item from './item'
+import ListItem from './list-item'
 
 export default function List() {
   // 擴充原本的資料多一個屬性來代表是否有加入收藏(布林值，預設為false)
@@ -44,7 +44,7 @@ export default function List() {
         <tbody>
           {books.map((book) => {
             return (
-              <Item
+              <ListItem
                 key={book.isbn}
                 book={book}
                 handleToggleBookmark={handleToggleBookmark}
