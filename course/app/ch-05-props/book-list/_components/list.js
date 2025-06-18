@@ -1,15 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 
 // 範例資料
 import data from '../_data/books.json'
-
-// 實心圖
-import bookmarkIconFill from '../_icons/bookmark-fill.svg'
-// 空心圖
-import bookmarkIcon from '../_icons/bookmark.svg'
+// 使用item元件
+import Item from './item'
 
 export default function List() {
   // 擴充原本的資料多一個屬性來代表是否有加入收藏(布林值，預設為false)
@@ -48,20 +44,11 @@ export default function List() {
         <tbody>
           {books.map((book) => {
             return (
-              <tr key={book.isbn}>
-                <td>{book.isbn}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>
-                  <Image
-                    onClick={() => {
-                      handleToggleBookmark(book.isbn)
-                    }}
-                    src={book.bookmark ? bookmarkIconFill : bookmarkIcon}
-                    alt=""
-                  />
-                </td>
-              </tr>
+              <Item
+                key={book.isbn}
+                book={book}
+                handleToggleBookmark={handleToggleBookmark}
+              />
             )
           })}
         </tbody>
