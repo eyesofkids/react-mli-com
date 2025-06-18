@@ -15,8 +15,7 @@ export default function MyInputRef() {
       <input type="text" ref={inputRef} />
       <button
         onClick={() => {
-          //3. 可以用`inputRef.current`進行操作
-          // 要在事件處理函式，或是useEffect中，才能得到"虛擬DOM"的物件實體
+          //3. 可以用`inputRef.current`進行操作(但一樣要要在事件處理函式，或是useEffect中，才能得到"虛擬DOM"的物件實體)
           console.log(inputRef.current)
 
           alert(inputRef.current.value)
