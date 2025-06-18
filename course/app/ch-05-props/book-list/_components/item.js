@@ -1,10 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-// 實心圖
-import bookmarkIconFill from '../_icons/bookmark-fill.svg'
-// 空心圖
-import bookmarkIcon from '../_icons/bookmark.svg'
+// 使用Icon元件
+import Icon from './icon'
 
 export default function Item({ book = {}, handleToggleBookmark = () => {} }) {
   return (
@@ -14,13 +11,7 @@ export default function Item({ book = {}, handleToggleBookmark = () => {} }) {
         <td>{book.title}</td>
         <td>{book.author}</td>
         <td>
-          <Image
-            onClick={() => {
-              handleToggleBookmark(book.isbn)
-            }}
-            src={book.bookmark ? bookmarkIconFill : bookmarkIcon}
-            alt=""
-          />
+          <Icon book={book} handleToggleBookmark={handleToggleBookmark} />
         </td>
       </tr>
     </>
