@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 export default function MySelect() {
+  // 選項用字串陣列(或來自資料庫可以用物件陣列)
   const statusOptions = ['審核中', '處理中', '已完成']
   // select對應的狀態值
   const [status, setStatus] = useState('')
