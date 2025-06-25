@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+// 連結用
+import Link from 'next/link'
 
 // https://my-json-server.typicode.com/eyesofkids/json-fake-data/insurance
 export default function InsurancePage() {
@@ -33,7 +35,9 @@ export default function InsurancePage() {
         {insurances.map((v) => {
           return (
             <li key={v.id}>
-              {v.id}/{v.customer}/{v.type}
+              <Link href={`./insurance/${v.id}`}>
+                {v.id}/{v.customer}/{v.type}
+              </Link>
             </li>
           )
         })}
