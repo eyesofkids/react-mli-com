@@ -11,6 +11,7 @@ export default function IdPage() {
   const params = useParams()
   console.log(params)
   // id是資料夾的名稱[id]轉變為物件屬性
+  // 會得到 `{id: xxxx}` 物件
   const id = params.id
 
   // 接收從伺服器來的資料(物件陣列)
