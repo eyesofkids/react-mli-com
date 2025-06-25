@@ -8,12 +8,14 @@ import CssLoader from './_components/css-loader'
 import { useFetch } from '@/hooks/use-fetch'
 
 export default function InsurancePage() {
+  // 使用自訂勾子作fetch的get(裡面有useState/useEffect)
   const { data, loading, error } = useFetch(
     'https://my-json-server.typicode.com/eyesofkids/json-fake-data/insurance'
   )
-  // 檢查data資料類型再套用到map裡
+  // 檢查data資料類型是需要的，再套用到要使用的狀態裡
   const insurances = Array.isArray(data) ? data : []
 
+  // 載入資料時呈現載入指示動畫
   if (loading) {
     return (
       <>

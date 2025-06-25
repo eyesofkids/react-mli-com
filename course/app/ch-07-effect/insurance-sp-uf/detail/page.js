@@ -14,11 +14,11 @@ export default function DetailPage() {
   const sp = useSearchParams()
   // id是網址上的搜尋參數(查詢字串)，例如 `?id=CL-2023-001`
   const id = sp.get('id')
-
+  // 使用自訂勾子作fetch的get(裡面有useState/useEffect)
   const { data, loading, error } = useFetch(
     `https://my-json-server.typicode.com/eyesofkids/json-fake-data/insurance/${id}`
   )
-  // 檢查data資料類型再套用到map裡
+  // 檢查data資料類型是需要的，再套用到要使用的狀態裡
   const insurance = data?.id
     ? data
     : {
@@ -30,6 +30,7 @@ export default function DetailPage() {
         status: '',
       }
 
+  // 載入資料時呈現載入指示動畫
   if (loading) {
     return (
       <>
