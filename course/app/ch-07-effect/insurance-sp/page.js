@@ -14,17 +14,26 @@ export default function InsurancePage() {
 
   // 向伺服器獲取資料的函式
   const getData = async () => {
-    const url =
-      'https://my-json-server.typicode.com/eyesofkids/json-fake-data/insurance'
-    const res = await fetch(url)
-    const resData = await res.json()
-    console.log(resData)
-    // 設定到狀態，觸發重新渲染
-    setInsurances(resData)
-    // 關閉載入指示
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
+    // 使用async-await時，針對例外情況要寫try...catch敘述
+    try {
+      const url =
+        'https://my-json-server.typicode.com/eyesofkidsgyh/json-fake-data/insurance'
+      const res = await fetch(url)
+      const resData = await res.json()
+      console.log(resData)
+      // 設定到狀態，觸發重新渲染
+      // 狀態必須要是統一的資料類型(陣列)才進行設定
+      if (Array.isArray(resData)) {
+        setInsurances(resData)
+      }
+
+      // 關閉載入指示
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   // 樣式2
@@ -49,7 +58,7 @@ export default function InsurancePage() {
       <h1>保險單列表頁(SearchParams)</h1>
       <hr />
       <ul>
-        {insurances.map((v) => {
+        {insurances?.map((v) => {
           return (
             <li key={v.id}>
               <Link href={`./insurance-sp/detail?id=${v.id}`}>
