@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react'
 // 使用next提供的獲取搜尋參數的勾子
 import { useSearchParams } from 'next/navigation'
-
+// 連結用
 import Link from 'next/link'
+// 載入指示動畫
+import CssLoader from '../_components/css-loader'
 
 // 動態路由參數
 export default function DetailPage() {
@@ -22,6 +24,8 @@ export default function DetailPage() {
     amount: 0,
     status: '',
   })
+  // 一個指示是否正在載入資料的狀態
+  const [loading, setLoading] = useState(true)
 
   // 向伺服器獲取資料的函式
   const getData = async (id) => {
@@ -31,6 +35,10 @@ export default function DetailPage() {
     console.log(resData)
     // 設定到狀態，觸發重新渲染
     setInsurance(resData)
+    // 關閉載入指示
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
   }
 
   // 樣式2
@@ -39,6 +47,17 @@ export default function DetailPage() {
     // 呼叫async函連接伺服器得到資料
     getData(id)
   }, [])
+
+  if (loading) {
+    return (
+      <>
+        <h1>保險單詳細頁(SearchParams)</h1>
+        <Link href="./">回列表</Link>
+        <hr />
+        <CssLoader />
+      </>
+    )
+  }
 
   return (
     <>
