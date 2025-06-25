@@ -34,7 +34,7 @@ export default function InsurancePage() {
         {insurances?.map((v) => {
           return (
             <li key={v.id}>
-              <Link href={`./insurance-sp/detail?id=${v.id}`}>
+              <Link href={`./insurance-sp-uf/detail?id=${v.id}`}>
                 {v.id}/{v.customer}/{v.type}
               </Link>
             </li>
