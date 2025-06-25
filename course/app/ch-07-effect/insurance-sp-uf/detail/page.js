@@ -1,0 +1,55 @@
+'use client'
+
+// 使用next提供的獲取搜尋參數的勾子
+import { useSearchParams } from 'next/navigation'
+// 連結用
+import Link from 'next/link'
+// 載入指示動畫
+import CssLoader from '../_components/css-loader'
+// 改用useFetch
+import { useFetch } from '@/hooks/use-fetch'
+
+// 動態路由參數
+export default function DetailPage() {
+  const sp = useSearchParams()
+  // id是網址上的搜尋參數(查詢字串)，例如 `?id=CL-2023-001`
+  const id = sp.get('id')
+
+  const { data, loading, error } = useFetch(
+    `https://my-json-server.typicode.com/eyesofkids/json-fake-data/insurance/${id}`
+  )
+  // 檢查data資料類型再套用到map裡
+  const insurance = data?.id
+    ? data
+    : {
+        id: '',
+        customer: '',
+        type: '',
+        date: '',
+        amount: 0,
+        status: '',
+      }
+
+  if (loading) {
+    return (
+      <>
+        <h1>保險單詳細頁(SearchParams+useFetch)</h1>
+        <Link href="./">回列表</Link>
+        <hr />
+        <CssLoader />
+      </>
+    )
+  }
+
+  return (
+    <>
+      <h1>保險單詳細頁(SearchParams+useFetch)</h1>
+      <Link href="./">回列表</Link>
+      <hr />
+      <p>編號: {insurance.id}</p>
+      <p>客戶: {insurance.customer}</p>
+      <p>類型: {insurance.type}</p>
+      <p>日期: {insurance.date}</p>
+    </>
+  )
+}

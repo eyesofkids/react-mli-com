@@ -17,7 +17,7 @@ export default function InsurancePage() {
     // 使用async-await時，針對例外情況要寫try...catch敘述
     try {
       const url =
-        'https://my-json-server.typicode.com/eyesofkidsgyh/json-fake-data/insurance'
+        'https://my-json-server.typicode.com/eyesofkids/json-fake-data/insurance'
       const res = await fetch(url)
       const resData = await res.json()
       console.log(resData)
